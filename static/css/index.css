@@ -1,0 +1,307 @@
+body {
+    background-color: #fff;
+}
+
+ul {
+    list-style: none;
+}
+
+/******************** 动态菜单 ***********************/
+
+.menu_whole {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 1000px;
+    left: -350px;
+    transition: all 0.5s;
+}
+
+.menu_ready {
+    top: 0;
+}
+
+/* 菜单栏按钮 */
+.menu_icon {
+    position: absolute;
+    top: 50px;
+    left: 350px;
+    height: 75px;
+    width: 75px;
+    background-color: #0077bb;
+    transition: all 0.5s;
+    z-index: 50;
+}
+
+.menu_icon:hover {
+    transform: scale(2);
+    left: 375px;
+    background-color: #0099dd;
+}
+
+/* 主菜单 */
+.menu {
+    position: absolute;
+    top:0;
+    height: 100%;
+    width: 350px;
+    background-color: #0099dd;
+    z-index: 100;
+    transition: all 0.5s;
+}
+
+.menu_popped {
+    left: 0;
+}
+
+.menu_list {
+    position: absolute;
+    padding: 0;
+    left: 5%;
+    top: 5%;
+    width: 90%;
+}
+
+.menu_item {
+    margin: 2px 0;
+    width: 100%;
+    padding-left: 30px;
+    background-color: transparent;
+    color: #fff;
+    line-height: 3rem;
+    font-size: 1.5rem;
+    border-radius: 1.5rem;
+    transition: all 0.3s;
+}
+
+.menu_item:hover {
+    background-color: #fff;
+    color: #0099dd;
+}
+
+.menu_item_active {
+    background-color: #fff;
+    color: #0099dd;
+}
+
+@media (max-width:575px) {
+    .menu_whole {
+        left: -100%;
+    }
+    
+    .menu {
+        left: 0;
+        width: 100%;
+    }
+
+    .menu_icon{
+        left: 100%;
+    }
+
+    .menu_icon:hover {
+        transform: scale(1.1);
+        left: 100%;
+        background-color: #0099dd;
+    }
+
+    .menu_popped {
+        left: 0;
+    }
+
+    .menu_item {
+        padding-left: 0;
+        text-align: center;
+    }
+}
+
+/******************* 首页幻灯片 **********************/
+
+/* 轮播图 */
+
+@media (max-width:767px) {
+    #slides {
+        display: none
+    }
+}
+
+.fader {
+    width: 100%;
+    position: relative;
+    padding: 0;
+    padding-top: 55%;
+}
+
+/* 每一张轮播图 */
+
+.slide {
+    width: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 轮播图图片上的文字 */
+
+/* 它的内容要定位在距离ul下方12%的位置 */
+
+/* 半透明黑色背景 白色字体 文字距离左侧40px 字体大小26px*/
+
+.slide .img_info {
+    width: 100%;
+    /* 计算盒模型宽高的时候,宽度和高度指为border的宽高 */
+    /* 默认的box-sizing都是content-box,是核心内容的宽高 */
+    /* 所以使用border-box可以防止图片中文字右侧出头 */
+    box-sizing: border-box;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 26px;
+    color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    bottom: 5%;
+    opacity: 0.7;
+    left: 0;
+    right: 0;
+}
+
+.fader .slide {
+    /* float: left; */
+    height: 100%;
+    position: absolute;
+    top: 0;
+    /* 添加切换图片的过渡效果 */
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.fader .active {
+    /* 添加切换图片的过渡效果 */
+    opacity: 1;
+}
+
+/* 轮播图左右箭头 */
+
+/* 相对于.fader做绝对定位   字体大小80px, 加粗  50x80px */
+
+/* 让左右箭头定位到中间的位置, 高度50%, 然后进行微调左右箭头的位置 */
+
+.prev, .next {
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    top: 50%;
+    margin-top: -40px;
+    padding: 12px 10px 0 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    line-height: 80px;
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    color: #aaa;
+    /* 左右箭头默认隐藏 */
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.prev {
+    left: 50px;
+}
+
+.next {
+    right: 50px;
+}
+
+.fader:hover .prev {
+    opacity: 0.8;
+    left: 0;
+    cursor: pointer;
+}
+
+.fader:hover .next {
+    opacity: 0.8;
+    right: 0;
+    cursor: pointer;
+}
+
+/* 轮播图小圆点页标 */
+
+.fader .pager_list {
+    text-align: center;
+    position: absolute;
+    top: 6%;
+    width: 100%;
+    height: 42px;
+    /* background-color: rgba(255, 0, 0, 0.3); */
+}
+
+.fader .pager_list>li {
+    width: 20px;
+    display: inline-block;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: 0 5px;
+}
+
+/* 内边距设置为百分比单位时,统一指宽度的百分比 */
+
+.pager_list li {
+    opacity: 0.25;
+}
+
+/* 轮播图在当前图片对应的li中会添加一个class active */
+
+.pager_list li.active, .pager_list li:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+/******************* 博客文章卡片 ********************/
+
+.card-article {
+    transition: all 0.5s;
+    background-color: #eee;
+    border-radius: 6px;
+}
+
+.card-article:hover {
+    cursor: pointer;
+}
+
+/* 文章卡片图片遮罩层 */
+
+.card-img-shell {
+    position: relative;
+    width: 100%;
+    padding-top: 50%;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* 文章图片层 */
+
+.card-img-shell img {
+    transition: all 0.5s;
+    opacity: 0.65;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+/* 当鼠标移入文章卡片时，图片放大高光 */
+
+.card-article:hover .card-img-shell img {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+.card-heading {
+    font-size: 1.3rem;
+    font-weight: bold;
+    /* text-decoration-line: underline; */
+}
