@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="getClientInfo.js"></script>
+
+    <style>
+        #screenBox {
+            width: 3000px;
+            height: 3000px;
+            background-color: #888;
+            margin: 0;
+            pardding: 0;
+        }
+
+        #screenCoords {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body id="screenBox">
+    <div id="screenCoords"></div>
+    <script>
+        var window_loaded_timestamp = new Date().getTime();
+        var timer = 0;
+        var xpos = 0, ypos = 0;
+        var xpos_abs = 0, ypos_abs = 0;
+        var xpos_now = 0, ypos_now = 0;
+        var mouse_trace = []
+
+        function findScreenCoords(mouseEvent) {
+
+            if (mouseEvent) {
+                //FireFox
+                xpos = mouseEvent.pageX;
+                xpos_abs = mouseEvent.screenX;
+                ypos = mouseEvent.pageY;
+                ypos_abs = mouseEvent.screenY;
+            }
+            else {
+                //IE
+                xpos = window.event.pageX;
+                xpos_abs = window.event.screenX;
+                ypos = window.event.pageY;
+                ypos_abs = window.event.screenY;
+            }
+        }
+        document.onmousemove = findScreenCoords;
+        
+        var timer = setInterval(function(){
+            var now_timestamp =new Date().getTime();
+            timer = (now_timestamp - window_loaded_timestamp) / 1000;
+            document.getElementById("screenCoords").innerHTML = timer + "<br>" + xpos + ", " + ypos + "<br>" + xpos_abs + ", " + ypos_abs;
+            
+            // if mouse has moved, push the new coord with current time to the mouse trace
+            if (xpos_now != xpos){
+                xpos_now = xpos;
+                ypos_now = ypos;
+                mouse_trace.push([xpos_now, ypos_now, timer])
+            }
+            
+        }, 50)
+
+    </script>
+</body>
+
+
+</html>
