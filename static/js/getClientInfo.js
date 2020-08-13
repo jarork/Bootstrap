@@ -327,33 +327,5 @@ var timerReg = setInterval(function () {
         height_now = height;
         clientInfo.windowSize_trace.push([width, height, timer])
     }
+}, 1000)
 
-    document.getElementById("screenCoords").innerHTML = `
-                        Timer: ${(timer/1000).toFixed(1)+' s'} <br>
-                        X_rel: ${xpos_now - scrollX} <br>
-                        Y_rel: ${ypos_now - scrollY} <br>
-                        <br>
-                        X_abs: ${xpos_abs} <br>
-                        Y_abs: ${ypos_abs} <br>
-                        <br>
-                        scrollX: ${scrollX_now} <br>
-                        scrollY: ${scrollY_now} <br>
-                        <br>
-                        zoom_ratio: ${zoomRatio * 100 + "%"} <br>
-                        window_size: ${width + 'px'} * ${height + "px"} <br>
-                        `
-
-}, 100)
-
-var printBrowserInfo = setTimeout(() => {
-    document.getElementById('browserInfo').innerHTML = `
-        Client IP: ${clientInfo.clientIP} <br>
-        From Page: ${clientInfo.fromURL} <br> 
-        Current Page: ${clientInfo.curURL} <br>
-        OS: ${clientInfo.OS} <br>
-        Browser: ${clientInfo.browser} <br>
-        Mobile: ${clientInfo.mobile} <br>
-        Cookies: ${clientInfo.cookies} <br>
-        Screen Size: ${clientInfo.screenSize} <br>
-        `
-}, 10);
